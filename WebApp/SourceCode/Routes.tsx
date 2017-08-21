@@ -1,24 +1,23 @@
 import * as React from 'react';
 import {
-    Route,
-    IndexRoute
+    Router,
+    Route
 } from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import HomePage from './Pages/HomePage';
 
-class MainView extends React.Component<undefined, undefined> {
+const history = createBrowserHistory()
+
+export default class Routes extends React.Component<undefined, undefined> {
     render() {
         return (
-            <div>
-                {this.props.children}
-            </div>
+            <Router history={history}>
+                <div>
+                    <Route exact path="/" component={HomePage as any}/>
+                    <Route path="/homePage" component={HomePage as any}/>
+                </div>
+            </Router>
         );
     }
 }
-
-export default (
-    <Route path="/" component={MainView}>
-        <IndexRoute component={HomePage}/>
-        <Route path="/homePage" component={HomePage}/>
-    </Route>
-);
